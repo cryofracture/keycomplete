@@ -1,6 +1,9 @@
 from application import app
 from flask import Flask, request, render_template, redirect, url_for, flash
-"""import os
+import psycopg2
+import os
+"""
+import os
 
 
 from dotenv import load_dotenv
@@ -27,64 +30,46 @@ load_dotenv
 @app.route('/', methods = ['GET'])
 def index():
     return render_template('main.html')
-#     user = {'username': 'Taylor'}
-#     return f"""
-# <html>
-#     <head>
-#         <title>Home Page - Completed Keys</title>
-#     </head>
-#     <body>
-#         <h1>Hello, {user['username']}!</h1>
-#     </body>
-# </html>
-#     """
-
-# @app.route('/completed_key_review', methods = ['POST', 'GET'])
-# def review():
-#     advertiser  = request.form.get('advertiser')
-#     tank        = request.form.get('tank')
-#     healer      = request.form.get('healer')
-#     first_dps   = request.form.get('dps1')
-#     second_dps  = request.form.get('dps2')
-#     keyholder   = request.form.get('keyholder')
-#     discount    = request.form.get('discount')
 
 
-#     return render_template('review.html', advertiser=advertiser, tank=tank, healer=healer, first_dps=first_dps, second_dps=second_dps, keyholder=keyholder, discount=discount)
+@app.route('/final', methods = ['POST', 'GET'])
+def final():
+    advertiser  = request.form.get('advertiserName')
+    tank        = request.form.get('tankName')
+    healer      = request.form.get('healerName')
+    first_dps   = request.form.get('DPS1Name')
+    second_dps  = request.form.get('DPS2Name')
+    keyholder   = request.form.get('keyholderName')
+    discount    = request.form.get('discount')
+    print(advertiser)
+    print(tank)
+    print(healer)
+    print(first_dps)
+    print(second_dps)
+    print(keyholder)
+    print(discount)
+    try:
+        query = f""" INSERT INTO {os.environ['DB_TABLE']} ({os.environ['DB_COLS']}) VALUES ('{advertiser}', '{tank}', '{healer}', '{first_dps}', '{second_dps}', '{keyholder}',  '{discount}') """
+        connection = psycopg2.connect(user=os.environ['DB_USER'],
+                                    password=os.environ['DB_PASS'],
+                                    host=os.environ['DB_HOST'],
+                                    port=os.environ['DB_PORT'],
+                                    database=os.environ['DB_NAME'])
+        cursor = connection.cursor()
+        cursor.execute(query)
+        
 
-
-
-# @app.route('/submitted', methods = ['POST', 'GET'])
-# def submitted():
-#     advertiser  = request.form.get('advertiser')
-#     tank        = request.form.get('tank')
-#     healer      = request.form.get('healer')
-#     first_dps   = request.form.get('dps1')
-#     second_dps  = request.form.get('dps2')
-#     keyholder   = request.form.get('keyholder')
-#     discount    = request.form.get('discount')
-
-#     try:
-#         query = f""" INSERT INTO {os.environ['DB_TABLE']} ({os.environ['DB_COLS']}) VALUES ('{advertiser}', '{tank}', '{healer}', '{first_dps}', '{second_dps}', '{keyholder}',  '{discount}') """
-#         connection = psycopg2.connect(user=os.environ['DB_USER'],
-#                                     password=os.environ['DB_PASS'],
-#                                     host=os.environ['DB_HOST'],
-#                                     port=os.environ['DB_PORT'],
-#                                     database=os.environ['DB_NAME'])
-#         cursor = connection.cursor()
-#         cursor.execute(query)
-
-#     except (Exception, psycopg2.Error) as error:
-#         print(f"Error while connecting to Postgres:\n {error}")
+    except (Exception) as error:
+        print(f"Error while connecting to Postgres:\n {error}")
     
-#     finally:
-#         if(connection):
-#             cursor.close()
-#             connection.close()
-#             print("Postgres connection closed.")
+    # finally:
+    #     if(connection):
+    #         cursor.close()
+    #         connection.close()
+    #         print("Postgres connection closed.")
 
 
-#     return render_template('review.html', advertiser=advertiser, tank=tank, healer=healer, first_dps=first_dps, second_dps=second_dps, keyholder=keyholder, discount=discount)
+    return render_template('final.html', advertiser=advertiser, tank=tank, healer=healer, first_dps=first_dps, second_dps=second_dps, keyholder=keyholder, discount=discount)
 
 
 

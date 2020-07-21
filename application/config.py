@@ -8,9 +8,13 @@ class Config(object):
     DEBUG = True
     TESTING = True
     CSRF_ENABLED = True
-    SECRET_KEY = os.urandom(32)
-    app.config['SECRET_KEY'] = SECRET_KEY
+    SECRET_KEY = os.environ['SECRET_KEY']
 
 class ProductionConfig(Config):
     DEBUG = False
-    PRODUCTION = True
+    PRODUCTION = False
+
+class DevelomentConfig(Config):
+    DEBUG = True
+    TESTING = True
+    DEVELOPMENT = True

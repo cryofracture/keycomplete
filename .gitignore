@@ -2,3 +2,6 @@ venv
 flaskenv
 praw.ini
 .idea
+.env
+pycache
+__pycache__/

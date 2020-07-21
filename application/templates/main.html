@@ -8,34 +8,34 @@
 
 {% block app_content %}
 <div class="container input-group mb-3 mainInput">
-    <form>
+    <form method="POST" action="{{url_for('finalsudo a') }}">
         <div class="form-group">
             <label class="label label-secondary" for="advertiserName">Advertiser Name</label>
-            <input type="text" class="form-control" id="advertiserName" placeholder="Advertiser@Realm">
+            <input type="text" class="form-control" name="advertiserName" placeholder="Advertiser@Realm">
         </div>
         <div class="form-group">
             <label class="label label-secondary" for="tankName">Tank Name</label>
-            <input type="text" class="form-control" id="tankName" placeholder="Tank@Realm">
+            <input type="text" class="form-control" name="tankName" placeholder="Tank@Realm">
         </div>
         <div class="form-group">
             <label class="label label-secondary" for="HealerName">Healer Name</label>
-            <input type="text" class="form-control" id="HealerName" placeholder="Healer@Realm">
+            <input type="text" class="form-control" name="HealerName" placeholder="Healer@Realm">
         </div>
         <div class="form-group">
             <label class="label label-secondary" for="DPS1Name">First DPS Name</label>
-            <input type="text" class="form-control" id="DPS1Name" placeholder="DPS1@Realm">
+            <input type="text" class="form-control" name="DPS1Name" placeholder="DPS1@Realm">
         </div>
         <div class="form-group">
             <label class="label label-secondary" for="DPS2Name">Second DPS Name</label>
-            <input type="text" class="form-control" id="DPS2Name" placeholder="DPS2@Realm">
+            <input type="text" class="form-control" name="DPS2Name" placeholder="DPS2@Realm">
         </div>
         <div class="form-group">
             <label class="label label-secondary" for="KeyholderName">Keyholder Name (Optional)</label>
-            <input type="text" class="form-control" id="KeyholderName" placeholder="Keyholder@Realm">
+            <input type="text" class="form-control" name="KeyholderName" placeholder="Keyholder@Realm">
         </div>
         <div class="form-group">
-            <label class="label label-secondary" for="Discount">Discount Offered</label>
-            <input type="text" class="form-control" id="Discount" placeholder="10k">
+            <label class="label label-secondary" for="discount">Discount Offered</label>
+            <input type="text" class="form-control" name="discount" placeholder="10k">
         </div>
         <button class="btn btn-success" type="submit">Button</button>
     </form>

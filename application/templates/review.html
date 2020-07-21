@@ -4,9 +4,13 @@
 {{super()}}
 {% endblock %}
 
-{% endblock %}
-
 {% block content %}
-{{super()}}
+<form action="" method="POST" novalidate>
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.username.label }}<br>
+        {{ form.}}
+    </p>
+</form>
 
 {% endblock %}
